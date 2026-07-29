@@ -4,8 +4,7 @@ import db from "../DB/mongodg_conect.js";
 const benefitClient = db.collection("welfare_record")
 
 
-// const res =await benefitClient.insertOne({"moty":Date(),soldierId:3})
-// console.log(res);
+
 
 export async function createRecord(newRecord) {
     try{
@@ -32,4 +31,4 @@ export async function getById(soldierId) {
 }
 
 
-// console.log(await getById(34));
+// console.log(await getById(2));

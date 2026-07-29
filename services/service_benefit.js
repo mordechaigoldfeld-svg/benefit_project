@@ -59,4 +59,13 @@ export async function getfinalBody(body,id) {
 //  console.log(await getfinalBody(test,2));
  
 
+export async function getSoldierById(soldierId) {
+    const soldier = await getById(soldierId)
+    if( soldier === null){
+        throw newError(404,"id not found")
+    }
+    return soldier
+}
 
+
+// console.log(await getSoldierById(82));

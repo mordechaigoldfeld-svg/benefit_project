@@ -80,15 +80,7 @@ export function isValidType(key,type) {
 
 
 
-// export async function areOpenRecord(id) {
-//     try{
-//         const exist = await 
 
-//     }catch(err){
-//         console.log(err)
-//     }
-    
-// }
 
 
 
