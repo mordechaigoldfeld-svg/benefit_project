@@ -51,7 +51,7 @@ export async function isValidBodyDetails(body){
 
 export async function validBenefitType(benefitType) {
     try{
-        // const {benefitType} = body
+        
         const valid = ["giftCard","diningHall"]
         if(valid.includes(benefitType)){
             return true
@@ -93,14 +93,3 @@ export function isValidBodyPeriod(body){
         console.log(err)
     }
 }
-
-// const test = {
-//     "benefitType":"giftCard",
-//     "details":{
-//             "cardProvider": 1,
-//             "monthlyValue": 2,
-//             "validMerchants": 3},
-//     "decisionReason":"test",
-//     "budgetAprovved":true}
-
-// console.log(await isValidBodyPeriod(test));
