@@ -1,9 +1,10 @@
+import { timeStamp } from "console";
 import db from "../DB/mongodg_conect.js";
 
 const benefitClient = db.collection("welfare_record")
 
 
-// const res =await benefit.insertOne({"moty":"test"})
+// const res =await benefitClient.insertOne({"moty":Date(),soldierId:3})
 // console.log(res);
 
 export async function createRecord(newRecord) {
@@ -18,3 +19,17 @@ export async function createRecord(newRecord) {
 }
 
 
+
+export async function getById(soldierId) {
+    try{
+        const response = await benefitClient.findOne({soldierId:soldierId})
+        return response
+
+    }catch(err){
+        console.log(err)
+    }
+    
+}
+
+
+// console.log(await getById(34));
