@@ -13,4 +13,3 @@ expose 3000
 cmd ["node", "server.js"]
 
 
-# docker build -t mongotest .
