@@ -1,0 +1,28 @@
+{
+  "name": "benifit_project",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000b\u0000e\u0000n\u0000e\u0000f\u0000i\u0000t\u0000_\u0000p\u0000r\u0000o\u0000j\u0000e\u0000c\u0000t\u0000\r\u0000 \u0000",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --watch server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mordechaigoldfeld-svg/benefit_project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/mordechaigoldfeld-svg/benefit_project/issues"
+  },
+  "homepage": "https://github.com/mordechaigoldfeld-svg/benefit_project#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.111.0",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mongodb": "^7.5.0"
+  }
+}
