@@ -14,7 +14,7 @@ export async function insertRecord(req,res) {
 
     }catch(err){
         if(err.status){
-          return  res.status(err.status).json(err.message)
+        return res.status(err.status).json(err.message)
         }
         res.status(500).json("server error")
     }

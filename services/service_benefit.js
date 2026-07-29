@@ -28,10 +28,10 @@ export async function getfinalBody(body,id) {
     if(!isValidType(budgetAprovved,"boolean")){
         throw newError(400,"budgetAprovved invalid type")
     }
-    if(!validBenefitType(benefitType)){
+    if(!await validBenefitType(benefitType)){
         throw newError(400,"invalid benefit type")
     }
-    if(!isValidBodyDetails(body)){
+    if(!await isValidBodyDetails(body)){
         console.log(body)
         throw newError(400,"invalid body details fields")
     }
@@ -49,6 +49,7 @@ export async function getfinalBody(body,id) {
         }]
     }
     return await createRecord(finalBody)
+    
    
     
 }
