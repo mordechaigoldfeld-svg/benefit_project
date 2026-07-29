@@ -81,6 +81,26 @@ export function isValidType(key,type) {
 
 
 
+export function isValidBodyPeriod(body){
+    try{
+         const {benefitType,details,decisionReason,budgetAprovved} = body
+        if(!benefitType || !details || !decisionReason || !budgetAprovved){
+            return false
+        }
+        return true
 
+    }catch(err){
+        console.log(err)
+    }
+}
 
+// const test = {
+//     "benefitType":"giftCard",
+//     "details":{
+//             "cardProvider": 1,
+//             "monthlyValue": 2,
+//             "validMerchants": 3},
+//     "decisionReason":"test",
+//     "budgetAprovved":true}
 
+// console.log(await isValidBodyPeriod(test));
