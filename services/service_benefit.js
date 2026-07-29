@@ -1,5 +1,5 @@
-import { createRecord, getById } from "../DAL/dal.benefit.js";
-import { isValidBody, isValidBodyDetails, isValidType, validBenefitType } from "../utils/benefitValidator.js";
+import { createRecord, getById, updatePeriod } from "../DAL/dal.benefit.js";
+import { isValidBody, isValidBodyDetails, isValidBodyPeriod, isValidType, validBenefitType } from "../utils/benefitValidator.js";
 import { newError } from "../utils/createError.js";
 
 
@@ -69,3 +69,54 @@ export async function getSoldierById(soldierId) {
 
 
 // console.log(await getSoldierById(82));
+
+
+
+
+
+
+
+
+
+
+export async function getfinalPeriod(body,id) {
+    
+    if(await getById(id) === null){
+        throw newError(404,"id not found")
+    }
+    if(!isValidBodyPeriod(body)){
+        throw newError(400,"invalid body fields")
+    }
+    const {benefitType,details,decisionReason,budgetAprovved} = body
+  
+    if(!isValidType(benefitType,"string")){
+        throw newError(400,"benefitType invalid type")
+    } 
+    if(!isValidType(decisionReason,"string")){
+        throw newError(400,"decisionReason invalid type")
+    } 
+    if(!isValidType(details,"object")){
+        throw newError(400,"details invalid type")
+    } 
+    if(!isValidType(budgetAprovved,"boolean")){
+        throw newError(400,"budgetAprovved invalid type")
+    }
+    if(!await validBenefitType(benefitType)){
+        throw newError(400,"invalid benefit type")
+    }
+    if(!await isValidBodyDetails(body)){
+        console.log(body)
+        throw newError(400,"invalid body details fields")
+    }
+    const finalPeriod ={
+            startDate:Date(),
+            endDate:null,
+            decisionReason,
+            budgetAprovved,
+            benefitType,
+            details
+        }
+    
+    return await updatePeriod(id,benefitType,finalPeriod) 
+    
+}

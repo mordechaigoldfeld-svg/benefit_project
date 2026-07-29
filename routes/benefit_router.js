@@ -1,5 +1,5 @@
 import express from "express"
-import { insertRecord,getSoldier } from "../controler/benefit_cntrl.js"
+import { insertRecord,getSoldier, patchPeriod } from "../controler/benefit_cntrl.js"
 import { bodyExists } from "../midllewear/bodyValidator.js"
 
 
@@ -12,3 +12,6 @@ router.post("/:soldierId/benefits",bodyExists,insertRecord)
 
 
 router.get("/:soldierId/benefits",getSoldier)
+
+
+router.patch("/:soldierId/benefits",bodyExists,patchPeriod)
