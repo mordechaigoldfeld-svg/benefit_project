@@ -18,7 +18,7 @@ export async function createBudget(budget) {
     
     const {data,error} = await client.from("budget_allocation").insert(budget).select().single()
     if(error){
-        return error
+        throw newError(400,error.message)
     }
     return data
 }
@@ -29,11 +29,11 @@ export async function createBudget(budget) {
 
 export async function getQuery(body) {
     
-    const {unit,month,benefit_type} = body
+    const {unit,month,benefit_type,allocated_amount} = body
     
-    const {data,error} = await client.from("budget_allocation").select().eq("unit",unit).eq("month",month).eq("benefit_type",benefit_type)
+    const {data,error} = await client.from("budget_allocation").select().eq("unit",unit).eq("month",month).eq("benefit_type",benefit_type).eq("allocated_amount",allocated_amount)
     if(error){
-        return error
+        throw newError(400,error.message)
     }
     return data
     
@@ -41,17 +41,3 @@ export async function getQuery(body) {
 // console.log(await getQuery({unit:"8200",month:"may",benefit_type:"test"}))
 
 
-// ==========================
-// Router
-// import { getAll } from '../../../js_exercises/week15/mongodb/DAL/usersdal.js'
-// import { get } from 'node:http'
-
-// Router.get("/",async(req,res)=>{
-//     const {data,error} = await getAll()
-//     if(error){
-//         console.log(error);
-// 	return res.status(500).json("server error")
-        
-//     }
-// 	return res.json(data)
-// }) 
