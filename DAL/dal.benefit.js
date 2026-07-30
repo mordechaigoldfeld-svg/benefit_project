@@ -35,7 +35,7 @@ export async function getById(soldierId) {
 export async function updatePeriod(soldierId,benefitType,newPeriod) {
     
     try{
-        const response = await benefitClient.updateOne({soldierId:soldierId},{$push:{history:newPeriod},$set:{benefitType:benefitType}})
+        const response = await benefitClient.updateOne({soldierId:soldierId},{$set:{currentBenefitType:benefitType},$push:{history:newPeriod}})
         return response
     }catch(err){
         console.log(err)
@@ -45,6 +45,6 @@ export async function updatePeriod(soldierId,benefitType,newPeriod) {
 
 // console.log(await updatePeriod("3","moty",{"ok":0}));
 
-
+// ,$set:{"history.-1.endDate":Date()}
 // const history =[{"primo":9}]
 // console.log(history[history.length-1].endDate=Date());

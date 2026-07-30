@@ -46,7 +46,7 @@ export async function patchPeriod(req,res) {
         const {soldierId} = req.params
         const body = req.body
         const response = await getfinalPeriod(body,soldierId)
-        res.status(200).json({"reverted":true})
+        res.status(200).json({"updated":true})
 
     }catch(err){
         if(err.status){
