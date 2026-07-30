@@ -7,8 +7,8 @@
 
 export function isValidBodyBudget(body){
     try{
-         const {benefitType,unit,month,allocated_amount} = body
-        if(!benefitType || !unit || !month || !allocated_amount){
+         const {benefit_type,unit,month,allocated_amount} = body
+        if(!benefit_type || !unit || !month || !allocated_amount){
             return false
         }
         return true
@@ -23,8 +23,8 @@ export function isValidBodyBudget(body){
 
 export function isValidBodyTransaction(body){
     try{
-         const {amount,reason} = body
-        if(!amount){
+         const {benefitType,unit,montamount} = body
+        if(!benefitType || !unit || !month || !allocated_amount){
             return false
         }
         return true

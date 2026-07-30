@@ -1,5 +1,7 @@
+import { get } from "node:http";
 import { client } from "../DB/supabase_connect.js";
 import { newError } from "../utils/createError.js";
+import { log } from "node:console";
 
 
 
@@ -17,9 +19,6 @@ export async function createBudget(budget) {
     }
     return data
 }
-
-
-
 
 export async function getQuery(body) {
     
@@ -46,11 +45,6 @@ export async function insertTransaction(body) {
     
 }
 
-// try{
-// console.log(await insertTransaction({id:45,amount:45,reason:"ok"}));
-// }catch(err){
-//     console.log(err)
-// }
 
 
 
@@ -73,15 +67,7 @@ export async function getTransactionById(budget_id) {
 // console.log(await client.from("budget_allocation").select("allocated_amount").eq("id",1));
 
 
-export async function getBudgetQuery(query) {
 
-    const {data,error} = await query
-    if(error){
-        throw newError(400,error)
-    }
-    return data
-    
-}
 
 
 
@@ -125,8 +111,32 @@ export async function getTotalAmount(budget_id){
 }
 
 
-// const test = await getTotalAmount(4)
-// console.log(test["allocatedAmount"])
+export async function getBudgetQuery(fillters) {
+    let query = client.from("budget_allocation").select()
+    if(!fillters){
+        return await query
+    }
+    const {unit,month,benefit_type} = fillters
+
+    
+    if(unit){
+        query=query.eq("unit",unit)
+    }
+    if(month){
+        query=query.eq("month",month)
+    }
+    if(benefit_type){
+        
+        query=query.eq("benefit_type",benefit_type)
+    }
+    
+    
+    return await query
+    
+}
+
+// const a = await getBudgetQuery({month:"jun",unit:"9900",benefit_type:"giftCard"});
+// console.log(a.data);
 
 
 

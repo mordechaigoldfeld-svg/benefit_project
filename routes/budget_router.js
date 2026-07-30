@@ -1,6 +1,6 @@
 import express from "express"
 import { bodyExists } from "../midllewear/bodyValidator.js"
-import { insertBudget,getTransaction,postTransaction } from "../controler/budget_cntrl.js"
+import { insertBudget,getTransaction,postTransaction,getByQuery } from "../controler/budget_cntrl.js"
 
 
 const router =express.Router()
@@ -16,9 +16,9 @@ router.post("/",bodyExists,insertBudget)
 
 router.get("/:id/transaction",getTransaction)
 
-// router.get("/:id/transacsions")
 
-// router.get("/")
+
+router.get("/",getByQuery)
 
 
 
