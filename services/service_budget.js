@@ -81,6 +81,7 @@ export async function getTotalAll(filters) {
     const spentAmmount = data.data.reduce((acc,ind)=>{
         return acc +ind.allocated_amount
     },0)
+    console.log(data.data)
     console.log(spentAmmount);
     return {
         unit:data.data[0].unit,
@@ -88,9 +89,10 @@ export async function getTotalAll(filters) {
         month:data.data[0].month,
         allocated_amount:data.data[0].allocated_amount,
         spentAmmount:spentAmmount,
-        remainingAmount:data.data[0].allocated_amount - spentAmmount
+        remainingAmount:data.data[0].allocated_amount - spentAmmount,
+        data:data.data
     }
     
     
 }
-// console.log(await getTotalAll())
+console.log(await getTotalAll({unit:"9900"}))
