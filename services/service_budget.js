@@ -1,4 +1,4 @@
-import { createBudget, getQuery } from "../DAL/dal_budget.js";
+import { createBudget, getQuery, getTransactionById } from "../DAL/dal_budget.js";
 import { isValidBodyBudget } from "../utils/budget_validator.js";
 import { newError } from "../utils/createError.js";
 
@@ -20,4 +20,15 @@ export async function newBudget(filters) {
     }
     return await createBudget(filters)
     
+}
+
+
+
+export async function getTransactionHandler(budget_id){
+    
+    const transaction = await getTransactionById(budget_id)
+    if(transaction.length === 0){
+        throw newError(404,"budget id not found")
+    }
+    return transaction
 }

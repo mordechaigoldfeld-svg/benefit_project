@@ -1,4 +1,4 @@
-import { newBudget } from "../services/service_budget.js";
+import { getTransactionHandler, newBudget } from "../services/service_budget.js";
 
 
 
@@ -15,5 +15,24 @@ export async function insertBudget(req,res) {
         }
         res.status(500).json("server error")
         }
+    
+}
+
+
+
+export async function getTransaction(req,res) {
+
+    try{
+        const {id} = req.params
+        const transaction = await getTransactionHandler(id) 
+        res.status(200).json(transaction)
+
+    }catch(err){
+        if(err.status){
+            return res.status(err.status).json(err.message)
+        }
+
+        res.status(500).json("server error")
+    }
     
 }

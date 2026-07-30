@@ -4,11 +4,6 @@ import { newError } from "../utils/createError.js";
 
 
 
-export async function getAll() {
-    
-    return await client.from("spend_transaction").select()
-
-}
 
 
 
@@ -41,3 +36,39 @@ export async function getQuery(body) {
 // console.log(await getQuery({unit:"8200",month:"may",benefit_type:"test"}))
 
 
+
+export async function insertTransaction(body) {
+
+    const {data,error} = await client.from("spend_transaction").insert(body).select().single()
+    if(error){
+        throw newError(400,error.message)
+    }
+    return data
+    
+}
+
+
+
+
+export async function getTransactionById(budget_id) {
+
+        const {data,error}  = await client.from("spend_transaction").select().eq("budget_id",budget_id)
+        if(error){
+            throw newError(400,error.message)
+        }
+        return data
+    
+    
+}
+
+// console.log(await insertTransaction({budget_id:4,amount:244,reason:"test"}));
+// console.log(await getTransactionById(4));
+
+
+
+export async function getBudgetQuery(filters) {
+
+    const {data,error} = await client.from("")
+
+    
+}
