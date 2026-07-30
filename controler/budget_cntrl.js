@@ -1,4 +1,4 @@
-import { getTransactionHandler, newBudget } from "../services/service_budget.js";
+import { getTransactionHandler, createTransaction, newBudget } from "../services/service_budget.js";
 
 
 
@@ -32,6 +32,25 @@ export async function getTransaction(req,res) {
             return res.status(err.status).json(err.message)
         }
 
+        res.status(500).json("server error")
+    }
+    
+}
+
+
+
+export async function postTransaction(req,res) {
+
+    try{
+        const {id} = req.params
+        const body = req.body
+        const response = await createTransaction(id,body)
+        res.status(201).json(response)
+
+    }catch(err){
+        if(err.status){
+            return res.status(err.status).json(err.message)
+        }
         res.status(500).json("server error")
     }
     

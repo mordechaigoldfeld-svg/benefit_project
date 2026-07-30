@@ -18,7 +18,6 @@ export async function createBudget(budget) {
     return data
 }
 
-// console.log(await createBudget({unit:"8200",benefit_type:"test",month:"may",allocated_amount:345,}));
 
 
 
@@ -33,7 +32,6 @@ export async function getQuery(body) {
     return data
     
 }
-// console.log(await getQuery({unit:"8200",month:"may",benefit_type:"test"}))
 
 
 
@@ -42,10 +40,18 @@ export async function insertTransaction(body) {
     const {data,error} = await client.from("spend_transaction").insert(body).select().single()
     if(error){
         throw newError(400,error.message)
+        
     }
     return data
     
 }
+
+// try{
+// console.log(await insertTransaction({id:45,amount:45,reason:"ok"}));
+// }catch(err){
+//     console.log(err)
+// }
+
 
 
 
@@ -64,11 +70,55 @@ export async function getTransactionById(budget_id) {
 // console.log(await insertTransaction({budget_id:4,amount:244,reason:"test"}));
 // console.log(await getTransactionById(4));
 
+// console.log(await client.from("budget_allocation").select("allocated_amount").eq("id",1));
 
 
-export async function getBudgetQuery(filters) {
+export async function getBudgetQuery(query) {
 
-    const {data,error} = await client.from("")
-
+    const {data,error} = await query
+    if(error){
+        throw newError(400,error.message)
+    }
+    return data
     
 }
+
+
+
+
+// console.log(await getBudgetQuery(client.from('budget_allocation').select().eq('id',1)));
+// console.log(await client.from("spend_transaction").select("amount").eq("budget_id",4))
+
+
+
+
+
+
+
+
+
+
+
+export async function getTotalAmount(budget_id){
+
+    const allocatedAmount = await getBudgetQuery(client.from('budget_allocation').select('allocated_amount').eq('id',budget_id))
+    const totalAmount = await getBudgetQuery(client.from("spend_transaction").select("amount").eq("budget_id",budget_id))
+    const spentAmmount = totalAmount.reduce((acc,ind)=>{
+        return acc +ind.amount
+    },0)
+    const remainingAmount = allocatedAmount[0].allocated_amount - spentAmmount
+
+    return{
+
+    
+    "allocatedAmount":allocatedAmount[0].allocated_amount,
+    allSpent:totalAmount,
+    "spentAmmount":spentAmmount,
+    "remainingAmount":remainingAmount
+    
+}
+}
+
+
+// const test = await getTotalAmount(4)
+// console.log(test["allocatedAmount"])
