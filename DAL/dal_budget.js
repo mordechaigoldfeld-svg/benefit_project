@@ -77,7 +77,7 @@ export async function getBudgetQuery(query) {
 
     const {data,error} = await query
     if(error){
-        throw newError(400,error.message)
+        throw newError(400,error)
     }
     return data
     
@@ -100,12 +100,17 @@ export async function getBudgetQuery(query) {
 
 
 export async function getTotalAmount(budget_id){
-
+    ;
+    
     const allocatedAmount = await getBudgetQuery(client.from('budget_allocation').select('allocated_amount').eq('id',budget_id))
     const totalAmount = await getBudgetQuery(client.from("spend_transaction").select("amount").eq("budget_id",budget_id))
     const spentAmmount = totalAmount.reduce((acc,ind)=>{
         return acc +ind.amount
     },0)
+    console.log(allocatedAmount)
+    if(allocatedAmount.length === 0){
+        throw newError(400,"error invalid id")
+    }
     const remainingAmount = allocatedAmount[0].allocated_amount - spentAmmount
 
     return{
@@ -122,3 +127,15 @@ export async function getTotalAmount(budget_id){
 
 // const test = await getTotalAmount(4)
 // console.log(test["allocatedAmount"])
+
+
+
+
+
+
+
+
+
+
+
+
